@@ -17,7 +17,7 @@ private:
     bool isListening{};
 
 public:
-    AcceptorToTCPServer(int port, const char* address="");
+    explicit AcceptorToTCPServer(int port, const char* address="");
     virtual ~AcceptorToTCPServer();
 
     int start();

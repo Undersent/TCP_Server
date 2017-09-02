@@ -6,10 +6,9 @@
 #include <cstring>
 #include <arpa/inet.h>
 #include "AcceptorToTCPServer.h"
-
-AcceptorToTCPServer::AcceptorToTCPServer(int port, const char *address) {
-
-}
+#include <iostream>
+AcceptorToTCPServer::AcceptorToTCPServer(int port, const char *address) :
+listeningSocketDescriptor(0), port(port), address(address), isListening(false){}
 
 AcceptorToTCPServer::~AcceptorToTCPServer() {
     if(listeningSocketDescriptor > 0){
@@ -22,12 +21,12 @@ int AcceptorToTCPServer::start()  {
         return 0;
     }
     listeningSocketDescriptor = socket(PF_INET, SOCK_STREAM, 0);
-
     struct sockaddr_in addressIn;
+
     memset(&addressIn, 0, sizeof(addressIn));
     addressIn.sin_family = PF_INET;
     addressIn.sin_port = htons(port);
-    if(address.size() > 0){
+    if(!address.empty()){
         inet_pton(PF_INET, address.c_str(), &(addressIn.sin_addr));
     }else{
         addressIn.sin_addr.s_addr = INADDR_ANY;
@@ -35,7 +34,8 @@ int AcceptorToTCPServer::start()  {
     int optval = 1;
     setsockopt(listeningSocketDescriptor, SOL_SOCKET, SO_REUSEADDR, &optval, sizeof optval );
 
-    int result = bind(listeningSocketDescriptor, (struct sockaddr*)&address, sizeof(address));
+    int result = bind(listeningSocketDescriptor,
+                      (struct sockaddr*)&addressIn, sizeof(addressIn));
     if(result != 0){
         perror("failed to bind()");
         return result;
@@ -51,18 +51,18 @@ int AcceptorToTCPServer::start()  {
 
 }
 
-TCPStreamData *AcceptorToTCPServer::accept() const {
-    if (isListening == false) {
-        return NULL;
+TCPStreamData* AcceptorToTCPServer::accept() const {
+    if (!isListening) {
+        return nullptr;
     }
 
     struct sockaddr_in addressIn;
     socklen_t len = sizeof(addressIn);
     memset(&addressIn, 0, sizeof(addressIn));
-    int sd = ::accept(listeningSocketDescriptor, (struct sockaddr*)&addressIn, &len);
-    if (sd < 0) {
+    int socketDescriptor = ::accept(listeningSocketDescriptor, (struct sockaddr*)&addressIn, &len);
+    if (socketDescriptor  < 0) {
         perror("accept() failed");
-        return NULL;
+        return nullptr;
     }
-    return new TCPStreamData(sd, &addressIn);
+    return new TCPStreamData(socketDescriptor , &addressIn);
 }
