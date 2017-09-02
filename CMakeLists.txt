@@ -1,8 +1,12 @@
-cmake_minimum_required(VERSION 3.8)
-project(TCP_Server)
+cmake_minimum_required(VERSION 3.3)
 
-set(CMAKE_CXX_STANDARD 14)
 
-set(SOURCE_FILES TCPStreamFactory.cpp TCPStreamFactory.h TCPStreamData.cpp TCPStreamData.h
-        AcceptorToTCPServer.cpp AcceptorToTCPServer.h Server.cpp)
-add_executable(TCP_Server ${SOURCE_FILES})
+
+add_subdirectory(src)
+add_subdirectory(Server_tests)
+#add_subdirectory(AlgAndDataStructures)
+
+#add_subdirectory(Server_tests/lib/googletest)
+#include_directories(Server_tests/lib/googletest/googletest/include)
+#include_directories(Server_tests/lib/googletest/googlemock/include)
+#target_link_libraries(TCP_Server gtest gtest_main)
