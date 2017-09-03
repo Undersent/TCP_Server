@@ -1,0 +1,9 @@
+cmake_minimum_required(VERSION 3.8)
+project(TCP_Server)
+
+#set(CMAKE_CXX_STANDARD 14)
+#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -lpthread")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14 -pthread")
+set(SOURCE_FILES TCPStreamFactory.cpp TCPStreamFactory.h TCPStreamData.cpp TCPStreamData.h
+        AcceptorToTCPServer.cpp AcceptorToTCPServer.h Server.cpp ../../AlgAndDataStructures/RSA.cpp ../../AlgAndDataStructures/RSA.h ../multithreading/Thread.cpp ../multithreading/Thread.h ../data_transfer/WorkerQueue.h ../data_transfer/WorkItem.h ConnectionHandler.h)
+add_executable(TCP_Server ${SOURCE_FILES})

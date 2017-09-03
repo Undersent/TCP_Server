@@ -16,3 +16,8 @@ TEST(SampleTest, testRSA){
 }
 
 
+TEST(SampleTest, testchar){
+   // char* input[] = {a,b,c};
+
+   // EXPECT_TRUE(!strcmp(input,"abc"));
+}

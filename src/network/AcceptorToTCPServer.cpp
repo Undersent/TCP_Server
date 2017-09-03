@@ -25,7 +25,7 @@ int AcceptorToTCPServer::start()  {
 
     memset(&addressIn, 0, sizeof(addressIn));
     addressIn.sin_family = PF_INET;
-    addressIn.sin_port = htons(port);
+    addressIn.sin_port = htons(static_cast<uint16_t>(port));
     if(!address.empty()){
         inet_pton(PF_INET, address.c_str(), &(addressIn.sin_addr));
     }else{
@@ -56,7 +56,7 @@ TCPStreamData* AcceptorToTCPServer::accept() const {
         return nullptr;
     }
 
-    struct sockaddr_in addressIn;
+    struct sockaddr_in addressIn{};
     socklen_t len = sizeof(addressIn);
     memset(&addressIn, 0, sizeof(addressIn));
     int socketDescriptor = ::accept(listeningSocketDescriptor, (struct sockaddr*)&addressIn, &len);
