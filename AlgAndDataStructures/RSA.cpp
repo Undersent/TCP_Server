@@ -3,3 +3,7 @@
 //
 
 #include "RSA.h"
+
+int RSA::get5() {
+    return 5;
+}

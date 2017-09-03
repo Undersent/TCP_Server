@@ -7,10 +7,13 @@
 #include <list>
 #include <zconf.h>
 #include <pthread.h>
+#include "../../AlgAndDataStructures/Queue.h"
+#include "../../AlgAndDataStructures/Queue.cpp"
 
 template <typename T>
 class WorkerQueue {
-    std::list<T> queue;
+    //std::list<T> queue;
+    Queue<T> queue;
     pthread_mutex_t mutex{};
     pthread_cond_t condv{};
 

@@ -38,7 +38,7 @@ public:
                 input[len] = NULL;
                 stream->send(input, len);
                 std::cout<<"thread "<< (long unsigned int)self()
-                        << "echoed "<< input << "back to the client\n";
+                        << " echoed "<< input << " back to the client\n";
 
             }
             delete item;

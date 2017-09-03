@@ -8,7 +8,7 @@
 
 class RSA {
 public:
-    static int get5(){return 5;}
+    int get5();
 };
 
 
