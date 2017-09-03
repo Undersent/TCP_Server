@@ -3,10 +3,16 @@
 //
 
 #include "SampleTest.h"
-
 #include "gtest/gtest.h"
-#include "../lib/googletest/googletest/include/gtest/gtest.h"
+#include "../../AlgAndDataStructures/RSA.h"
 
-TEST(basic_check, test_eq){
+
+TEST(SampleTest, test_eq){
     EXPECT_EQ(1,1);
 }
+
+TEST(SampleTest, testRSA){
+    EXPECT_EQ(5, RSA::get5());
+}
+
+
