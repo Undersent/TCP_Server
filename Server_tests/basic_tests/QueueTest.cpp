@@ -2,23 +2,17 @@
 // Created by rafal on 02.09.17.
 //
 
-#include "SampleTest.h"
+
 #include "gtest/gtest.h"
-#include "../../AlgAndDataStructures/RSA.h"
-#include "../../AlgAndDataStructures/RSA.cpp"
 #include "../../AlgAndDataStructures/Queue.h"
-#include "../../AlgAndDataStructures/Queue.cpp"
+
 
 namespace {
-    TEST(SampleTest, test_eq) {
+    TEST(QueueTest, test_eq) {
         EXPECT_EQ(1, 1);
     }
 
-    TEST(SampleTest, testRSA) {
-        RSA rsa;
-        EXPECT_EQ(5, rsa.get5());
-    }
-    TEST(SampleTest, queueFrontTest) {
+    TEST(QueueTest, queueFrontTest) {
         Queue<int> queue;
         queue.push_back(1);
         queue.push_back(2);
@@ -26,7 +20,7 @@ namespace {
         ASSERT_EQ(queue.front(), 1);
     }
 
-    TEST(SampleTest, queueSizeTest) {
+    TEST(QueueTest, queueSizeTest) {
         Queue<int> queue;
         ASSERT_EQ(0,0);
         queue.push_back(1);
@@ -35,7 +29,7 @@ namespace {
         ASSERT_EQ(3,3);
     }
 
-    TEST(SampleTest, queuePopFrontTest) {
+    TEST(QueueTest, queuePopFrontTest) {
         Queue<int> queue;
         queue.push_back(1);
         queue.push_back(2);
@@ -44,7 +38,7 @@ namespace {
         ASSERT_EQ(2,queue.size());
     }
 
-    TEST(SampleTest, queuePopFrontTestTillEmptyQueue) {
+    TEST(QueueTest, queuePopFrontTestTillEmptyQueue) {
         Queue<int> queue;
         queue.push_back(1);
         queue.push_back(2);

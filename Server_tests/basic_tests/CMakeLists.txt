@@ -4,8 +4,8 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11" )
 
 set(SOURCE_FILES main.cpp)
 
-add_executable(runBasicTest main.cpp SampleTest.h
-        SampleTest.cpp main.cpp)
+add_executable(runBasicTest main.cpp
+        QueueTest.cpp RSATest.cpp)
 
 target_link_libraries(runBasicTest gtest gtest_main)
 #target_link_libraries(runBasicServerTest /usr/local/lib/libgtest.a)

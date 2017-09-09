@@ -8,7 +8,7 @@
 #include <zconf.h>
 #include <pthread.h>
 #include "../../AlgAndDataStructures/Queue.h"
-#include "../../AlgAndDataStructures/Queue.cpp"
+
 
 template <typename T>
 class WorkerQueue {

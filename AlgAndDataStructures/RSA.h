@@ -1,15 +1,44 @@
 //
-// Created by rafal on 02.09.17.
+// Created by rafal on 08.09.17.
 //
 
-#ifndef TCP_SERVER_RSA_H
-#define TCP_SERVER_RSA_H
+#ifndef PROJECT_RSA_H
+#define PROJECT_RSA_H
+namespace RSA {
+
+    class RSA {
+
+    private:
+        long _ownPublicKey{};
+        long _converserPublicKey{};
+        long _privateKey{};
+        long _module{};
 
 
-class RSA {
-public:
-    int get5();
-};
+    public:
+        RSA();
+        RSA(long module, long converserPublicKey)
+                : _module(module), _converserPublicKey(converserPublicKey) {initializeKeys(true);}
 
 
-#endif //TCP_SERVER_RSA_H
+        void initializeKeys(bool);
+        std::vector<long> decryptString(std::vector<long> text);
+        std::vector<long> encryptString(std::vector<long> text);
+        long get_publicKey() const;
+        long get_module() const;
+        void set_converserPublicKey(long key);
+
+    private:
+        long decrypt(long codeRSA);
+        long encrypt(long codeRSA);
+        long GCD(long a, long b);
+        long extendedEuclideanModulo(long a, long n);
+
+        FRIEND_TEST(RSATest, GCDTest);
+        FRIEND_TEST(RSATest, EuclideadAlgTest);
+        FRIEND_TEST(RSATest, decryptingCharTest);
+        FRIEND_TEST(RSATest, decryptingMessageTest);
+    };
+
+}
+#endif //PROJECT_RSA_H

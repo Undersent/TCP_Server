@@ -9,10 +9,12 @@
 #include "../data_transfer/WorkerQueue.h"
 #include "../data_transfer/WorkItem.h"
 #include "ConnectionHandler.h"
+#include "../../AlgAndDataStructures/RSA.h"
 
 
 int main(int argc, char** argv)
 {
+
     // Process command line arguments
     if ( argc < 3 || argc > 4 ) {
         printf("usage: %s <workers> <port> <ip>\n", argv[0]);
