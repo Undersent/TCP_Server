@@ -5,22 +5,24 @@
 #include "../../AlgAndDataStructures/RSA.h"
 #include "../../AlgAndDataStructures/RSA.cpp"
 namespace RSA {
+    class RSATest : public ::testing::Test {
 
+    };
 
-    TEST(RSATest, GCDTest){
+    TEST_F(RSATest, GCDTest){
         RSA rsa;
         ASSERT_EQ(rsa.GCD(36, 31752),36);
         ASSERT_EQ(rsa.GCD(37, 31752),1);
     }
 
-    TEST(RSATest, EuclideadAlgTest){
+    TEST_F(RSATest, EuclideadAlgTest){
         RSA rsa;
         ASSERT_EQ(rsa.extendedEuclideanModulo(7, 5),3);
     }
 
 
 
-    TEST(RSATest, decryptingCharTest) {
+    TEST_F(RSATest, decryptingCharTest) {
         RSA rsa;
         RSA rsa1(rsa.get_module(), rsa.get_publicKey());
         rsa.set_converserPublicKey(rsa1.get_publicKey());
@@ -38,7 +40,7 @@ namespace RSA {
         ASSERT_EQ(rsa.decrypt(cipher),45);
     }
 
-    TEST(RSATest, decryptingMessageTest){
+    TEST_F(RSATest, decryptingMessageTest){
         RSA rsa;
         RSA rsa1(rsa.get_module(), rsa.get_publicKey());
         rsa.set_converserPublicKey(rsa1.get_publicKey());

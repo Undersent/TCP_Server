@@ -4,6 +4,8 @@
 
 #ifndef PROJECT_RSA_H
 #define PROJECT_RSA_H
+#include <vector>
+#include "gtest/gtest_prod.h"
 namespace RSA {
 
     class RSA {
@@ -34,6 +36,7 @@ namespace RSA {
         long GCD(long a, long b);
         long extendedEuclideanModulo(long a, long n);
 
+        friend class RSATest;
         FRIEND_TEST(RSATest, GCDTest);
         FRIEND_TEST(RSATest, EuclideadAlgTest);
         FRIEND_TEST(RSATest, decryptingCharTest);
