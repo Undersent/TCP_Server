@@ -5,6 +5,7 @@
 #include <cstdlib>
 #include <iostream>
 #include <vector>
+#include <random>
 #include "RSA.h"
 namespace RSA {
 
@@ -57,12 +58,16 @@ namespace RSA {
 
 
     void RSA::initializeKeys(bool isConverser) {
-        const long tp[10] = {11, 13, 17, 19, 23, 29, 31, 37, 41, 43}; //TODO:
+        //TODO:
+        std::vector<int> primes{11, 13, 17, 19, 23, 29, 31, 37, 41, 43};
         long p, q, phi, e;
-
+        int n = {0};
+        std::default_random_engine generator;
+        generator.seed (time( NULL ));
+        std::uniform_int_distribution<int> distribution(0,primes.size()-1);
         do {
-            p = tp[rand() % 10];
-            q = tp[rand() % 10];
+            p = primes[distribution(generator)];
+            q = primes[distribution(generator)];
         } while (p == q);
 
         phi = (p - 1) * (q - 1);
@@ -74,7 +79,6 @@ namespace RSA {
 
         _privateKey = extendedEuclideanModulo(e, phi);
         _ownPublicKey = e;
-
 
     }
 

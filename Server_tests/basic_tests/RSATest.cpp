@@ -34,13 +34,14 @@ namespace RSA {
         std::cerr << "rsa1 modul = " << rsa1._module << std::endl; */
         long cipher = rsa.encrypt(30);//216
         ASSERT_EQ(rsa1.decrypt(cipher),30);
+        cipher = rsa1.encrypt(45);
+        ASSERT_EQ(rsa.decrypt(cipher),45);
     }
 
     TEST(RSATest, decryptingMessageTest){
         RSA rsa;
         RSA rsa1(rsa.get_module(), rsa.get_publicKey());
         rsa.set_converserPublicKey(rsa1.get_publicKey());
-
         //std::cerr << "message = " << codedMessage << std::endl;
         std::vector<long> text{};
         text.push_back('a');
