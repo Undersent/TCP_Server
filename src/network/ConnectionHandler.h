@@ -22,7 +22,7 @@ public:
     explicit ConnectionHandler(WorkerQueue<WorkItem *> &queue) : queue(queue) {}
 
     void prepareRSAConnection( TCPStreamData* stream) {
-
+        //TODO: CHANGE CODE TO MORE MODERN VERSION. ITS NOT OBVIOUS HOW TO USE SMART POINTERS HERE
         std::vector<std::string> tokens{};
         char input[256];
         ssize_t len;

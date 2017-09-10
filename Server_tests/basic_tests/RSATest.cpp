@@ -44,11 +44,21 @@ namespace RSA {
         RSA rsa;
         RSA rsa1(rsa.get_module(), rsa.get_publicKey());
         rsa.set_converserPublicKey(rsa1.get_publicKey());
-        //std::cerr << "message = " << codedMessage << std::endl;
         std::vector<long> text{};
         text.push_back('a');
         text.push_back('b');
         text.push_back('c');
         ASSERT_EQ(rsa1.decryptString(rsa.encryptString(text)).front(), 'a');
     }
+
+    TEST_F(RSATest, decryptingWholeMessage){
+        RSA rsa;
+        RSA rsa1(rsa.get_module(), rsa.get_publicKey());
+        rsa.set_converserPublicKey(rsa1.get_publicKey());
+        ASSERT_EQ(rsa.decryptString(rsa.encryptString("b")),"b");
+        ASSERT_EQ(rsa.decryptString(rsa.encryptString("bAcd.")),"bAcd.");
+        ASSERT_EQ(rsa.decryptString(rsa.encryptString("b A cd.")),"b A cd.");
+    }
+
+
 }

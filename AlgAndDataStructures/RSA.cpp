@@ -6,6 +6,8 @@
 #include <iostream>
 #include <vector>
 #include <random>
+#include <iterator>
+#include <cstring>
 #include "RSA.h"
 namespace RSA {
 
@@ -56,9 +58,37 @@ namespace RSA {
         return text;
     }
 
+    std::string RSA::encryptString(std::string text){
+        std::string codedMessage{};
+        for(const char & c : text){
+            codedMessage+=" ";
+            codedMessage+=std::to_string(encrypt(c));
+        }
+
+        return  codedMessage;
+    }
+
+    std::string RSA::decryptString(std::string text) {
+        std::string uncodedMessage{};
+        //TODO: CHANGE CODE TO MORE MODERN VERSION. ITS NOT OBVIOUS HOW TO USE SMART POINTERS HERE
+
+        char * pch;
+        char *d = strdup(text.c_str());
+        pch = strtok(d," ");
+        while (pch != NULL)
+        {
+            printf ("%s\n",pch);
+            uncodedMessage+=char(decrypt(atol(pch)));
+            pch = strtok (NULL, " ");
+        }
+        delete pch;
+        delete d;
+        return uncodedMessage;
+    }
+
 
     void RSA::initializeKeys(bool isConverser) {
-        //TODO:
+        //TODO: ADD PRIMES GENERATOR
         std::vector<int> primes{11, 13, 17, 19, 23, 29, 31, 37, 41, 43};
         long p, q, phi, e;
         int n = {0};

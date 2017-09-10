@@ -26,6 +26,8 @@ namespace RSA {
         void initializeKeys(bool);
         std::vector<long> decryptString(std::vector<long> text);
         std::vector<long> encryptString(std::vector<long> text);
+        std::string encryptString(std::string text);
+        std::string decryptString(std::string String);
         long get_publicKey() const;
         long get_module() const;
         void set_converserPublicKey(long key);
