@@ -23,7 +23,7 @@ TCPStreamData::TCPStreamData(int socketDescriptor, sockaddr_in* address)
     peerPort = ntohs(address->sin_port);
 }
 
-ssize_t TCPStreamData::send(const char *buffer, size_t length) {
+ssize_t TCPStreamData::send(const char * buffer, size_t length) {
     return write(socketDescriptor, buffer, length);
 }
 

@@ -21,7 +21,7 @@ public:
     friend class AcceptorToTCPServer;
     friend class ConnectorToTCPServer;
 
-    ssize_t send(const char *buffer, size_t length);
+    ssize_t send(const char * buffer, size_t length);
     ssize_t receive(char* buffer, size_t length);
     std::string getPeerIP() const;
     int getPeerPort() const;
