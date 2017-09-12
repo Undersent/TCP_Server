@@ -8,6 +8,7 @@
 #include <string>
 #include <memory>
 
+
 namespace TST {
     class TernarySearchTree {
         struct Node {
@@ -28,14 +29,16 @@ namespace TST {
 
         std::shared_ptr<Node> getRoot();
 
-        void setRoot(std::shared_ptr<Node> node);
+        void setRoot(std::shared_ptr<Node> &node);
 
         void insert(std::string word, unsigned int frequency);
 
-        std::shared_ptr<Node> insert(std::shared_ptr<Node> node, std::string word, unsigned int frequency, unsigned int pos);
+        std::shared_ptr<Node> insert(std::shared_ptr<Node>& node, std::string& word, unsigned int frequency, unsigned int pos);
 
-        bool search(std::shared_ptr<Node> node, std::string word, unsigned int pos) const;
+        bool search(std::shared_ptr<Node> node, std::string& word, unsigned int pos) const;
 
+        void traverseTSTUtil(const std::shared_ptr<TernarySearchTree::Node>& root,
+                             char* buffer, unsigned int depth = 0);
 
     };
 }

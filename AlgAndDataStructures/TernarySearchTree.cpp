@@ -10,7 +10,7 @@ namespace TST {
         return (_root);
     }
 
-    void TernarySearchTree::setRoot(std::shared_ptr<Node> node) {
+    void TernarySearchTree::setRoot(std::shared_ptr<Node>& node) {
         _root = (node);
     }
 
@@ -19,8 +19,8 @@ namespace TST {
     }
 
     std::shared_ptr<TernarySearchTree::Node>
-    TernarySearchTree::insert(std::shared_ptr<TernarySearchTree::Node> node,
-                              std::string word, unsigned int frequency, unsigned int pos) {
+    TernarySearchTree::insert(std::shared_ptr<TernarySearchTree::Node>& node,
+                              std::string &word, unsigned int frequency, unsigned int pos) {
         if (node == nullptr) {
             if (word.length() <= pos) {
                 return (node);
@@ -49,7 +49,7 @@ namespace TST {
         return (node);
     }
 
-    bool TernarySearchTree::search(std::shared_ptr<TernarySearchTree::Node> node, std::string word, unsigned int pos) const {
+    bool TernarySearchTree::search(std::shared_ptr<TernarySearchTree::Node> node, std::string &word, unsigned int pos) const {
         while (node != nullptr) {
             if (word.at(pos) < node->_data) {
                 node = (node->_left);
@@ -65,4 +65,26 @@ namespace TST {
         }
         return false;
     }
+
+    void TernarySearchTree::traverseTSTUtil(const std::shared_ptr<TernarySearchTree::Node>& root,
+                                            char* buffer, unsigned int depth) {
+        if(root){
+            traverseTSTUtil(root->_left, buffer, depth);
+            buffer[depth] = root->_data;
+            if (root->_isEnd) {
+                buffer[depth+1] = '\0';
+                std::cerr<<buffer<<"\n";
+            }
+
+            // Traverse the subtree using equal pointer (middle subtree)
+            traverseTSTUtil(root->_equal, buffer, depth + 1);
+
+            // Finally Traverse the right subtree
+            traverseTSTUtil(root->_right, buffer, depth);
+        }
+
+
+
+    }
+
 }
