@@ -20,15 +20,15 @@ namespace TST {
         tst.insert("cat",123);
         tst.insert("dog", 123);
         tst.insert("cattable", 421);
-        //ASSERT_EQ(tst.getRoot()->_data,'c');
-        //ASSERT_EQ(tst.getRoot()->_equal->_equal->_data,'t');
-       // ASSERT_EQ(tst.getRoot()->_right->_data,'d');
-        //ASSERT_EQ(tst.getRoot()->_right->_equal,'o');
-        //ASSERT_EQ(tst.getRoot()->_right->_equal->_equal->_data,'g');
+        ASSERT_EQ(tst.getRoot()->_data,'c');
+        ASSERT_EQ(tst.getRoot()->_equal->_equal->_data,'t');
+        ASSERT_EQ(tst.getRoot()->_right->_data,'d');
+        ASSERT_EQ(tst.getRoot()->_right->_equal->_data,'o');
+        ASSERT_EQ(tst.getRoot()->_right->_equal->_equal->_data,'g');
 
         //ASSERT_EQ(tst.getRoot()->_right->_data,'c');
-        std::cerr<<tst.getRoot()->_equal->_equal->_data;
-        std::cerr<< tst.getRoot()->_right->_data;
+        //std::cerr<<tst.getRoot()->_equal->_equal->_data;
+        //std::cerr<< tst.getRoot()->_right->_data;
         //std::cerr<<tst.getRoot()->_right->_equal->_data;
         //std::cerr<<  tst.getRoot()->_right->_equal->_equal->_data;
         //ASSERT_EQ(tst.getRoot()->_equal->_data,'a');
