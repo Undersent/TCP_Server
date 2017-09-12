@@ -3,9 +3,9 @@ include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11" )
 
 set(SOURCE_FILES main.cpp)
-
+set(CMAKE_CXX_STANDARD 14)
 add_executable(runBasicTest main.cpp
-        QueueTest.cpp RSATest.cpp)
+        QueueTest.cpp RSATest.cpp TSTTest.cpp)
 
 target_link_libraries(runBasicTest gtest gtest_main)
 #target_link_libraries(runBasicServerTest /usr/local/lib/libgtest.a)

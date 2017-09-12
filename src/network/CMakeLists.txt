@@ -8,5 +8,5 @@ set(SOURCE_FILES TCPStreamFactory.cpp TCPStreamFactory.h TCPStreamData.cpp TCPSt
         AcceptorToTCPServer.cpp AcceptorToTCPServer.h Server.cpp ../../AlgAndDataStructures/RSA.cpp
         ../../AlgAndDataStructures/RSA.h ../multithreading/Thread.cpp ../multithreading/Thread.h
         ../data_transfer/WorkerQueue.h ../data_transfer/WorkItem.h ConnectionHandler.h
-        ../../AlgAndDataStructures/Queue.h ../../AlgAndDataStructures/RSA.cpp ../../AlgAndDataStructures/RSA.h)
+        ../../AlgAndDataStructures/Queue.h ../../AlgAndDataStructures/RSA.cpp ../../AlgAndDataStructures/RSA.h ../../AlgAndDataStructures/TernarySearchTree.cpp ../../AlgAndDataStructures/TernarySearchTree.h)
 add_executable(TCP_Server ${SOURCE_FILES})

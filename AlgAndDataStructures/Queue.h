@@ -7,14 +7,14 @@
 
 template <typename T>
 class Queue {
-    struct node
+    struct Node
     {
         T data;
-        node *next;
+        Node *next;
     };
     //size pop_front push_back front
-    node* head = nullptr;
-    node* tail = nullptr;
+    Node* head = nullptr;
+    Node* tail = nullptr;
     unsigned int sizeQ =0;
 
 public:
@@ -31,7 +31,7 @@ public:
 
 template<typename T>
 void Queue<T>::pop_front() {
-    node* temp;
+    Node* temp;
     temp = head;
     head= head->next;
     sizeQ--;
@@ -42,7 +42,7 @@ void Queue<T>::pop_front() {
 }
 template<typename T>
 void Queue<T>::push_back(T data) {
-    auto nodeT = new Queue::node;
+    auto nodeT = new Queue::Node;
     sizeQ++;
     nodeT->data=data;
     if(sizeQ == 1){

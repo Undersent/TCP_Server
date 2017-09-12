@@ -4,6 +4,7 @@ cmake_minimum_required(VERSION 3.3)
 
 add_subdirectory(src/network)
 add_subdirectory(Server_tests)
+
 #add_subdirectory(AlgAndDataStructures)
 
 #add_subdirectory(Server_tests/lib/googletest)
