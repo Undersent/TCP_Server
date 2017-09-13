@@ -10,11 +10,13 @@
 #include "../data_transfer/WorkItem.h"
 #include "ConnectionHandler.h"
 #include "../../AlgAndDataStructures/RSA.h"
+#include "../../AlgAndDataStructures/TextTools.h"
 
 
 int main(int argc, char** argv)
 {
-
+    TST::TernarySearchTree tst;
+    TSTTools::readFileIntoTST(tst);
     // Process command line arguments
     if ( argc < 3 || argc > 4 ) {
         printf("usage: %s <workers> <port> <ip>\n", argv[0]);

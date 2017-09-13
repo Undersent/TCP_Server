@@ -14,19 +14,19 @@ namespace TST {
         _root = (node);
     }
 
-    void TernarySearchTree::insert(std::string word, unsigned int frequency) {
+    void TernarySearchTree::insert(std::string word, std::string frequency) {
         _root = insert((_root), word, frequency, 0);
     }
 
     std::shared_ptr<TernarySearchTree::Node>
-    TernarySearchTree::insert(std::shared_ptr<TernarySearchTree::Node>& node,
-                              std::string &word, unsigned int frequency, unsigned int pos) {
+    TernarySearchTree::insert(std::shared_ptr<TernarySearchTree::Node> &node,
+                              std::string &word, std::string frequency, unsigned int pos) {
         if (node == nullptr) {
             if (word.length() <= pos) {
                 return (node);
             }
 
-            node = std::make_unique<TernarySearchTree::Node>(TernarySearchTree::Node(word.at(pos)));
+            node = std::make_shared<TernarySearchTree::Node>(TernarySearchTree::Node(word.at(pos)));
             if (pos + 1 == word.length()) {
                 node->_isEnd = true;
                 node->_frequency = frequency;
@@ -73,7 +73,7 @@ namespace TST {
             buffer[depth] = root->_data;
             if (root->_isEnd) {
                 buffer[depth+1] = '\0';
-                std::cerr<<buffer<<"\n";
+                std::cout<<buffer<<"\n";
             }
 
             // Traverse the subtree using equal pointer (middle subtree)
@@ -86,5 +86,8 @@ namespace TST {
 
 
     }
+
+
+
 
 }
