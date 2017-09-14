@@ -6,15 +6,19 @@
 #include "TernarySearchTree.h"
 namespace TST {
 
-    std::shared_ptr<TernarySearchTree::Node> TernarySearchTree::getRoot() {
-        return (_root);
+    //std::shared_ptr<TernarySearchTree::Node> TernarySearchTree::getRoot() {
+    //    return (_root);
+    //}
+
+    const std::shared_ptr<TST::TernarySearchTree::Node> &TST::TernarySearchTree::getRoot() const {
+        return _root;
     }
 
-    void TernarySearchTree::setRoot(std::shared_ptr<Node>& node) {
+    void TernarySearchTree::setRoot(const std::shared_ptr<Node>& node) {
         _root = (node);
     }
 
-    void TernarySearchTree::insert(std::string word, std::string frequency) {
+    void TernarySearchTree::insert(std::string& word, std::string& frequency) {
         _root = insert((_root), word, frequency, 0);
     }
 

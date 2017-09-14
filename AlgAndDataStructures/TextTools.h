@@ -7,8 +7,8 @@
 #include <sstream>
 #include <vector>
 #include "TernarySearchTree.h"
-#include <stdlib.h>
-
+#include <cstdlib>
+/*
 namespace TSTTools{
     std::string fileName{"../AlgAndDataStructures/google-books-common-words.txt"};
 
@@ -100,6 +100,8 @@ namespace TSTTools{
         traverse(root->_equal, str+root->_data);
         traverse(root->_right, str);
     }
-}
 
+
+}
+*/
 

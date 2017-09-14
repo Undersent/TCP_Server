@@ -9,10 +9,12 @@
 #include <memory>
 
 
-
+class SpellCorrector;
 namespace TST {
     class TernarySearchTree {
+    public :
         struct Node {
+            friend class SpellCorrector;
             char _data;
             bool _isEnd = false;
             std::shared_ptr<Node> _left = nullptr;
@@ -23,17 +25,21 @@ namespace TST {
             explicit Node(char data) : _data(data) {}
         };
         std::shared_ptr<Node> _root;
+
     public:
+        friend class SpellCorrector;
+
         TernarySearchTree() : _root(nullptr){}
 
         //By non-const l-value reference
         explicit TernarySearchTree(std::shared_ptr<Node> &node) : _root((node)) {}
 
-        std::shared_ptr<Node> getRoot();
+        //std::shared_ptr<Node> getRoot();
+        const std::shared_ptr<Node> &getRoot() const;
 
-        void setRoot(std::shared_ptr<Node> &node);
+        void setRoot(const std::shared_ptr<Node> &node);
 
-        void insert(std::string word, std::string frequency);
+        void insert(std::string& word, std::string& frequency);
 
         std::shared_ptr<Node> insert(std::shared_ptr<Node> &node, std::string &word, std::string frequency,
                                      unsigned int pos);
@@ -43,8 +49,9 @@ namespace TST {
         void traverseTSTUtil(const std::shared_ptr<TernarySearchTree::Node>& root,
                              char* buffer, unsigned int depth = 0);
 
-        friend void traverse(std::shared_ptr<Node>& root, std::string str);
+
     };
+
 }
 
 #endif //PROJECT_TERNARYSEARCHTREE_H
