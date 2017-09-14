@@ -68,7 +68,7 @@ namespace RSA {
         return  codedMessage;
     }
 
-    std::string RSA::decryptString(std::string text) {
+    std::string  RSA::decryptString(std::string text) {
         std::string uncodedMessage{};
         //TODO: CHANGE CODE TO MORE MODERN VERSION. ITS NOT OBVIOUS HOW TO USE SMART POINTERS HERE
 

@@ -13,6 +13,8 @@
 #include "../../AlgAndDataStructures/RSA.h"
 #include <stdio.h>
 #include "memory"
+#include "../messages/MessageClient.h"
+#include "../messages/MessageSame.h"
 #include <vector>
 
 class ConnectionHandler : public Thread {
@@ -40,12 +42,11 @@ public:
         }
 
         try {
-            //RSA::RSA rsa(atol(tokens[0].c_str()), atol(tokens[1].c_str()));
             rsa = std::make_unique<RSA::RSA>(RSA::RSA(atol(tokens[0].c_str()), atol(tokens[1].c_str())));
             char const *output = (std::to_string(rsa->get_publicKey()) + '\0').c_str();
             stream->send(output, sizeof(output) - 1);
             std::cout << "thread " << (long unsigned int) self()
-                      << " echoed " << output << " back to the client\n";
+                      << " established connection. Keys:  " << output << " send back to the client\n";
             //delete output;
         }
         catch (const std::out_of_range &oor) {
@@ -60,7 +61,8 @@ public:
     void *run() override {
         // Remove 1 item at a time and process it. Blocks if no items are
         // available to process.
-
+        TST::TernarySearchTree tst;
+        MessageClient messageClient(tst);
         for (int i{}, j{};; i++) {
             std::cout << "thread " << (long unsigned int) self()
                       << " loop " << i << " - waiting for item...\n";
@@ -77,9 +79,16 @@ public:
                 //std::string decodedInput = rsa->decryptString(input);
                 //cos tu robi ze stringiem aby dostac output;
                 std::cout<<"after decryption "<<rsa->decryptString(input)<<"\n";
-
+                //MessageClient messageClient(std::make_shared<Message_I>(MessageSame()));
+                //messageClient.getMessage(rsa->decryptString(input));
                 //const char* a = rsa->encryptString(input).c_str();
-                stream->send(rsa->encryptString(rsa->decryptString(input)).c_str(), len);
+                std::string decryptedMessage = rsa->decryptString(input);
+                messageClient.setMessageStrategy(decryptedMessage);
+                std::cout<<messageClient.getMessage()<<" wiadomosc do powrotu\n";
+                //stream->send(rsa->encryptString(rsa->decryptString(input)).c_str(), len);
+                std::string encryptedMessage = rsa->encryptString(messageClient.getMessage());
+
+                stream->send(encryptedMessage.c_str(),encryptedMessage.length());
                 std::cout << "thread " << (long unsigned int) self()
                           << " echoed " << rsa->encryptString(rsa->decryptString(input))
                           << " back to the client\n";

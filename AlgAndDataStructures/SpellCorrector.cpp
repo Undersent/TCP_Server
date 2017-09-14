@@ -6,10 +6,10 @@
 
 
 
-void SpellCorrector::readFileIntoTST(TST::TernarySearchTree &tst) {
+void SpellCorrector::readFileIntoTST() {
     std::string line;
     std::string word;
-    _tst = std::shared_ptr<TST::TernarySearchTree>(&tst);
+    //tst = std::shared_ptr<TST::TernarySearchTree>(&tst);
     //TODO RELATIVE PATH
     //std::ifstream file("/home/rafal/CLionProjects/TCP_Server/AlgAndDataStructures/common-words.txt");
     std::ifstream file("/home/rafal/CLionProjects/TCP_Server/AlgAndDataStructures/words.txt");
@@ -19,7 +19,7 @@ void SpellCorrector::readFileIntoTST(TST::TernarySearchTree &tst) {
         unsigned int i{};
         while (getline(file, line, '\t')) {
             if(i == 2){
-                tst.insert(tokens[0],tokens[1]);
+                _tst->insert(tokens[0],tokens[1]);
                 i=0;
             }
             tokens[i] = line;

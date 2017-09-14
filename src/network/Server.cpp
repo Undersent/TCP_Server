@@ -16,17 +16,7 @@
 
 int main(int argc, char** argv)
 {
-    //TODO MAKE STUB TO TEST THIS....
-    TST::TernarySearchTree tst;
-    SpellCorrector corrector;
-    corrector.readFileIntoTST(tst);
-    std::string word{"MUZIK"};
-    corrector.correctWord(word);
-    auto pq = corrector.getWordsPQ();
-    while(!pq->empty()) {
-        std::cout << pq->top().text << " czestosc "<< pq->top().value << " distance "<< pq->top().editDistance<<std::endl;
-        pq->pop();
-    }
+
     // Process command line arguments
     if ( argc < 3 || argc > 4 ) {
         printf("usage: %s <workers> <port> <ip>\n", argv[0]);

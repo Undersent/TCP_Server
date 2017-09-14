@@ -49,9 +49,9 @@ class SpellCorrector {
 public:
 
 
-    SpellCorrector() = default;
+    explicit SpellCorrector(std::shared_ptr<TST::TernarySearchTree>& tst) : _tst(tst){}
 
-    void readFileIntoTST(TST::TernarySearchTree& tst);
+    void readFileIntoTST();
 
     size_t getLevenshteinDistance(const std::string &s1, const std::string &s2);
 

@@ -8,5 +8,5 @@ set(SOURCE_FILES TCPStreamFactory.cpp TCPStreamFactory.h TCPStreamData.cpp TCPSt
         AcceptorToTCPServer.cpp AcceptorToTCPServer.h Server.cpp ../../AlgAndDataStructures/RSA.cpp
         ../../AlgAndDataStructures/RSA.h ../multithreading/Thread.cpp ../multithreading/Thread.h
         ../data_transfer/WorkerQueue.h ../data_transfer/WorkItem.h ConnectionHandler.h
-        ../../AlgAndDataStructures/Queue.h ../../AlgAndDataStructures/RSA.cpp ../../AlgAndDataStructures/RSA.h ../../AlgAndDataStructures/TernarySearchTree.cpp ../../AlgAndDataStructures/TernarySearchTree.h ../../AlgAndDataStructures/TextTools.h ../../AlgAndDataStructures/SpellCorrector.cpp ../../AlgAndDataStructures/SpellCorrector.h)
+        ../../AlgAndDataStructures/Queue.h ../../AlgAndDataStructures/RSA.cpp ../../AlgAndDataStructures/RSA.h ../../AlgAndDataStructures/TernarySearchTree.cpp ../../AlgAndDataStructures/TernarySearchTree.h ../../AlgAndDataStructures/TextTools.h ../../AlgAndDataStructures/SpellCorrector.cpp ../../AlgAndDataStructures/SpellCorrector.h ../messages/Message_I.h ../messages/MessageCorrect.cpp ../messages/MessageCorrect.h ../messages/MessageSame.cpp ../messages/MessageSame.h ../messages/MessageClient.cpp ../messages/MessageClient.h)
 add_executable(TCP_Server ${SOURCE_FILES})
