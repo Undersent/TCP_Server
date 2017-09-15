@@ -29,7 +29,7 @@ public:
 
     const std::string &getCleanMessage() const;
 
-    void cleanMessage(std::string &_message, unsigned int noOfDeletedChar);
+    void prepareMessageToCheckInDictionary(std::string &_message, unsigned int noOfDeletedChar);
 };
 
 

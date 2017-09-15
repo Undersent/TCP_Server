@@ -9,7 +9,6 @@
 //strategy pattern
 class Message_I {
 public:
-    Message_I() = default;
     virtual std::string getMessage(std::string& message) = 0;
 };
 

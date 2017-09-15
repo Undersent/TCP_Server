@@ -1,6 +1,7 @@
 //
 // Created by rafal on 12.09.17.
 //
+#include <gtest/gtest.h>
 #include "gtest/gtest.h"
 #include "../../AlgAndDataStructures/TernarySearchTree.h"
 #include "../../AlgAndDataStructures/TernarySearchTree.cpp"

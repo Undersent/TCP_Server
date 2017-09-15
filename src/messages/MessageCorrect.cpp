@@ -21,6 +21,5 @@ std::string MessageCorrect::getMessage(std::string& message) {
         pq->pop();
         i++;
     }
-    std::cout<<correctedMessage<<" wiadomosc po korekcie";
     return correctedMessage;
 }
