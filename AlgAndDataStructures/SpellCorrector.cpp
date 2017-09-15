@@ -4,7 +4,9 @@
 
 #include "SpellCorrector.h"
 
-
+SpellCorrector::SpellCorrector() {
+    _tst = std::make_shared<TST::TernarySearchTree>(TST::TernarySearchTree());
+}
 
 void SpellCorrector::readFileIntoTST() {
     std::string line;
@@ -117,5 +119,7 @@ void SpellCorrector::setInputString(const std::string &inputString) {
 const std::shared_ptr<std::priority_queue<SpellCorrector::Word>> &SpellCorrector::getWordsPQ() const {
     return _wordsPQ;
 }
+
+
 
 

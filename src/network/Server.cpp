@@ -10,7 +10,6 @@
 #include "../data_transfer/WorkItem.h"
 #include "ConnectionHandler.h"
 #include "../../AlgAndDataStructures/RSA.h"
-#include "../../AlgAndDataStructures/TextTools.h"
 #include "../../AlgAndDataStructures/SpellCorrector.h"
 
 

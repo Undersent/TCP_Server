@@ -5,9 +5,9 @@
 #include "MessageCorrect.h"
 #include "../../AlgAndDataStructures/SpellCorrector.h"
 
-MessageCorrect::MessageCorrect(TST::TernarySearchTree tst) {
-    _tst = std::make_shared<TST::TernarySearchTree>(tst);
-    _corrector = std::make_shared<SpellCorrector>(SpellCorrector(_tst));
+MessageCorrect::MessageCorrect() : MAX_WORDS(10) {
+    //_tst = std::make_shared<TST::TernarySearchTree>(tst);
+    _corrector = std::make_shared<SpellCorrector>(SpellCorrector());
     _corrector->readFileIntoTST();
 }
 
@@ -15,23 +15,12 @@ std::string MessageCorrect::getMessage(std::string& message) {
     _corrector->correctWord(message);
     auto pq = _corrector->getWordsPQ();
     std::string correctedMessage{};
-    while (!pq->empty()) {
-        correctedMessage+=pq->top().text+"\n";
-        //std::cout << pq->top().text << " czestosc " << pq->top().value << " distance " << pq->top().editDistance
-        //          << std::endl;
+    int i=0;
+    while (!pq->empty() && i <= MAX_WORDS) {
+        correctedMessage += pq->top().text + "\n";
         pq->pop();
+        i++;
     }
     std::cout<<correctedMessage<<" wiadomosc po korekcie";
     return correctedMessage;
 }
-
-//TST::TernarySearchTree tst;
-//SpellCorrector corrector;
-//corrector.readFileIntoTST(tst);
-//std::string word{"MUZIK"};
-//corrector.correctWord(word);
-//auto pq = corrector.getWordsPQ();
-//while(!pq->empty()) {
-//     std::cout << pq->top().text << " czestosc "<< pq->top().value << " distance "<< pq->top().editDistance<<std::endl;
-//    pq->pop();
-//}

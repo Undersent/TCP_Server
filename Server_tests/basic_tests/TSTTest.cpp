@@ -4,7 +4,8 @@
 #include "gtest/gtest.h"
 #include "../../AlgAndDataStructures/TernarySearchTree.h"
 #include "../../AlgAndDataStructures/TernarySearchTree.cpp"
-#include "../../AlgAndDataStructures/TextTools.h"
+#include "../../src/messages/MessageClient.h"
+
 
 namespace TST {
     class TSTTest : public ::testing::Test {
@@ -59,4 +60,5 @@ namespace TST {
         //ASSERT_EQ(TSTTools::getLevensthienDistance("abc", "ac"),1);
 
     }
+
 }

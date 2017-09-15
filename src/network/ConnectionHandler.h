@@ -61,8 +61,8 @@ public:
     void *run() override {
         // Remove 1 item at a time and process it. Blocks if no items are
         // available to process.
-        TST::TernarySearchTree tst;
-        MessageClient messageClient(tst);
+        //TST::TernarySearchTree tst;
+        MessageClient messageClient;
         for (int i{}, j{};; i++) {
             std::cout << "thread " << (long unsigned int) self()
                       << " loop " << i << " - waiting for item...\n";
@@ -75,24 +75,11 @@ public:
             ssize_t len;
             while ((len = stream->receive(input, sizeof(input) - 1)) > 0) {
                 input[len] = NULL;
-                //std::cout<<"GOT "<<input;
-                //std::string decodedInput = rsa->decryptString(input);
-                //cos tu robi ze stringiem aby dostac output;
-                std::cout<<"after decryption "<<rsa->decryptString(input)<<"\n";
-                //MessageClient messageClient(std::make_shared<Message_I>(MessageSame()));
-                //messageClient.getMessage(rsa->decryptString(input));
-                //const char* a = rsa->encryptString(input).c_str();
                 std::string decryptedMessage = rsa->decryptString(input);
                 messageClient.setMessageStrategy(decryptedMessage);
                 std::cout<<messageClient.getMessage()<<" wiadomosc do powrotu\n";
-                //stream->send(rsa->encryptString(rsa->decryptString(input)).c_str(), len);
                 std::string encryptedMessage = rsa->encryptString(messageClient.getMessage());
-
                 stream->send(encryptedMessage.c_str(),encryptedMessage.length());
-                std::cout << "thread " << (long unsigned int) self()
-                          << " echoed " << rsa->encryptString(rsa->decryptString(input))
-                          << " back to the client\n";
-
             }
             delete item;
         }

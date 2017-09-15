@@ -10,10 +10,12 @@
 #include "../../AlgAndDataStructures/TernarySearchTree.h"
 
 class MessageCorrect : public Message_I{
+
     std::shared_ptr<SpellCorrector> _corrector;
-    std::shared_ptr<TST::TernarySearchTree> _tst;
+    const unsigned int MAX_WORDS{10};
+
 public:
-    explicit MessageCorrect(TST::TernarySearchTree tst);
+    MessageCorrect();
     std::string getMessage(std::string& message) override ;
 };
 

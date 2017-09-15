@@ -49,7 +49,7 @@ class SpellCorrector {
 public:
 
 
-    explicit SpellCorrector(std::shared_ptr<TST::TernarySearchTree>& tst) : _tst(tst){}
+    explicit SpellCorrector();
 
     void readFileIntoTST();
 
