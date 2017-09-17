@@ -13,6 +13,7 @@ class MessageSame : public Message_I{
 public:
     MessageSame() = default;
     std::string getMessage(std::string& message) override ;
+    const std::string getName()const override {return "MessageSame";};
 };
 
 

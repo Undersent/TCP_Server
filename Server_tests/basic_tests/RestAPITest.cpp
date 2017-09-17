@@ -22,6 +22,6 @@ TEST_F(RestAPITest, getRequest) {
 TEST_F(RestAPITest, getJoke) {
     MessageChuckNorrisJoke joker;
     std::string foo{"foo"};
-
+    std::cout<<"\n\n\n";
     std::cout<<"     "<<joker.getMessage(foo);
 }

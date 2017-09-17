@@ -2,38 +2,38 @@
 // Created by rafal on 14.09.17.
 //
 
+#include <zconf.h>
+#include <sys/param.h>
 #include "SpellCorrector.h"
 
 SpellCorrector::SpellCorrector() {
-    _tst = std::make_shared<TST::TernarySearchTree>(TST::TernarySearchTree());
+    _tst = std::make_unique<TernarySearchTree>(TernarySearchTree{});
 }
 
 void SpellCorrector::readFileIntoTST() {
-    std::string line;
-    std::string word;
-    //tst = std::shared_ptr<TST::TernarySearchTree>(&tst);
+    std::string line{};
+    std::string word{};
     //TODO RELATIVE PATH
-    //std::ifstream file("/home/rafal/CLionProjects/TCP_Server/AlgAndDataStructures/common-words.txt");
+    //std::ifstream file("../words.txt");
+    //home/rafal/CLionProjects/TCP_Server/cmake-build-debug/src/network/TCP_Server
     std::ifstream file("/home/rafal/CLionProjects/TCP_Server/AlgAndDataStructures/words.txt");
-    if (file.is_open())
-    {
+    if (file.is_open()) {
         std::string tokens[2];
         unsigned int i{};
         while (getline(file, line, '\t')) {
-            if(i == 2){
-                _tst->insert(tokens[0],tokens[1]);
-                i=0;
+            if (i == 2) {
+                _tst->insert(tokens[0], tokens[1]);
+                i = 0;
             }
             tokens[i] = line;
             i++;
         }
         file.close();
-    }
-    else std::cerr << "Unable to open file";
+    } else std::cerr << "Unable to open file";
 }
 
 
-size_t SpellCorrector::getLevenshteinDistance(const std::string &s1, const std::string &s2) {
+size_t SpellCorrector::computeLevenshteinDistance(const std::string &s1, const std::string &s2) const {
     const size_t m(s1.size());
     const size_t n(s2.size());
 
@@ -59,7 +59,6 @@ size_t SpellCorrector::getLevenshteinDistance(const std::string &s1, const std::
                 size_t t(upper < corner ? upper : corner);
                 costs[j + 1] = (costs[j] < t ? costs[j] : t) + 1;
             }
-
             corner = upper;
         }
     }
@@ -69,42 +68,40 @@ size_t SpellCorrector::getLevenshteinDistance(const std::string &s1, const std::
     return result;
 }
 
-void SpellCorrector::traverse(const std::shared_ptr<TST::TernarySearchTree::Node> &root, std::string str) {
-    if(root == nullptr) {
+void SpellCorrector::traverse(const std::unique_ptr<TernarySearchTree::Node> &root, const std::string str) const {
+    if (root == nullptr) {
         return;
     }
-    size_t editDistance = getLevenshteinDistance(_inputString, str + (root->_data));
+    size_t editDistance = computeLevenshteinDistance(_inputString, str + (root->_data));
     //if distance is greater than our limit we can skip traversing this nodes <- power of tree
-    if((str.length() < _inputString.length()) &&
-            getLevenshteinDistance(str, _inputString.substr(0, str.length() + 1)) > _EDIT_DISTANCE_LIMIT){
+    if ((str.length() < _inputString.length()) &&
+        computeLevenshteinDistance(str, _inputString.substr(0, str.length() + 1)) > _EDIT_DISTANCE_LIMIT) {
         return;
     } else if (str.length() > _inputString.length() + _EDIT_DISTANCE_LIMIT) {
         return;
-    }else if (abs(str.length() - _inputString.length()) <= _EDIT_DISTANCE_LIMIT &&
-            editDistance > _EDIT_DISTANCE_LIMIT){
+    } else if (abs(str.length() - _inputString.length()) <= _EDIT_DISTANCE_LIMIT &&
+               editDistance > _EDIT_DISTANCE_LIMIT) {
         return;
     }
 
     //use recursion to traverse the nodes to obtain words
     traverse(root->_left, str);
     if (root->_isEnd) {
-        if(editDistance < _EDIT_DISTANCE_LIMIT) {
-            Word word;
-            word.text = str+(root->_data);
-            word.editDistance = editDistance;
-            word.value = root->_frequency;
+        if (editDistance < _EDIT_DISTANCE_LIMIT) {
+            Word word{str + (root->_data), root->_frequency, editDistance};
             _wordsPQ->push(word);
         }
     }
-    traverse(root->_equal, str+(root->_data));
+    traverse(root->_equal, str + (root->_data));
     traverse(root->_right, str);
 }
 
-std::shared_ptr<std::priority_queue<SpellCorrector::Word>> SpellCorrector::correctWord(std::string &strToCompare) {
-    //std::shared_ptr<std::map<std::string, int>> map = std::make_shared(std::map<std::string, int>());
-    _wordsPQ = std::make_shared<std::priority_queue<Word>>(std::priority_queue<Word>());
-    if(strToCompare.empty()) {
-        //TODO throw exception??????
+std::unique_ptr<std::priority_queue<SpellCorrector::Word>> &
+SpellCorrector::correctWord(const std::string &strToCompare) {
+    _wordsPQ = std::make_unique<std::priority_queue<Word>>(std::priority_queue<Word>{});
+
+    if (strToCompare.empty()) {
+        throw std::invalid_argument("received empty string");
     }
     _inputString = strToCompare;
     traverse(_tst->getRoot(), "");
@@ -116,9 +113,10 @@ void SpellCorrector::setInputString(const std::string &inputString) {
     SpellCorrector::_inputString = inputString;
 }
 
-const std::shared_ptr<std::priority_queue<SpellCorrector::Word>> &SpellCorrector::getWordsPQ() const {
+std::unique_ptr<std::priority_queue<SpellCorrector::Word>> &SpellCorrector::getWordsPQ() {
     return _wordsPQ;
 }
+
 
 
 

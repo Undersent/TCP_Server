@@ -19,7 +19,7 @@
 
 class ConnectionHandler : public Thread {
     WorkerQueue<WorkItem *> &queue;
-    std::unique_ptr<RSA::RSA> rsa;
+    std::unique_ptr<RSA> rsa;
 
 public:
     explicit ConnectionHandler(WorkerQueue<WorkItem *> &queue) : queue(queue) {}
@@ -42,7 +42,7 @@ public:
         }
 
         try {
-            rsa = std::make_unique<RSA::RSA>(RSA::RSA(atol(tokens[0].c_str()), atol(tokens[1].c_str())));
+            rsa = std::make_unique<RSA>(RSA(atol(tokens[0].c_str()), atol(tokens[1].c_str())));
             char const *output = (std::to_string(rsa->get_publicKey()) + '\0').c_str();
             stream->send(output, sizeof(output) - 1);
             std::cout << "thread " << (long unsigned int) self()
@@ -75,11 +75,12 @@ public:
             ssize_t len;
             while ((len = stream->receive(input, sizeof(input) - 1)) > 0) {
                 input[len] = NULL;
-                std::string decryptedMessage = rsa->decryptString(input);
+                std::string decryptedMessage = rsa->decryptString(input) ;
                 messageClient.setMessageStrategy(decryptedMessage);
-                std::cout<<messageClient.getMessage()<<" wiadomosc do powrotu\n";
+                //std::cout<<messageClient.getMessage()<<" wiadomosc do powrotu\n";
                 std::string encryptedMessage = rsa->encryptString(messageClient.getMessage());
-                stream->send(encryptedMessage.c_str(),encryptedMessage.length());
+                stream->send(encryptedMessage.c_str(), encryptedMessage.length());
+
             }
             delete item;
         }

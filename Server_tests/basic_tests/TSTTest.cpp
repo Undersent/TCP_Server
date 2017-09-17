@@ -14,13 +14,11 @@ namespace TST {
     };
 
     TEST_F(TSTTest, CreatingClass) {
-        TST::TernarySearchTree tst;
-        //ASSERT_EQ(rsa.GCD(36, 31752),36);
-        //ASSERT_EQ(rsa.GCD(37, 31752),1);
+        TernarySearchTree tst{};
     }
 
     TEST_F(TSTTest, insertElement) {
-        TST::TernarySearchTree tst;
+        TernarySearchTree tst{};
         std::string cat = "cat";
         std::string number123 = "123";
         std::string dog = "dog";
@@ -39,7 +37,7 @@ namespace TST {
     }
 
     TEST_F(TSTTest, traverseTest) {
-        TST::TernarySearchTree tst;
+        TernarySearchTree tst{};
         std::string cat = "cat";
         std::string number123 = "123";
         std::string dog = "dog";
@@ -55,11 +53,5 @@ namespace TST {
 
     }
 
-    TEST_F(TSTTest, getLevenshteinDistanceTest) {
-        //ASSERT_EQ(TSTTools::getLevensthienDistance("raiseyourhands", "raiseyouhands"),1);
-       // ASSERT_EQ(TSTTools::getLevensthienDistance("abc", "acc"),1);
-        //ASSERT_EQ(TSTTools::getLevensthienDistance("abc", "ac"),1);
-
-    }
 
 }

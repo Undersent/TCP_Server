@@ -9,7 +9,6 @@
 #include "RestApi_I.h"
 
 class RestApi : RestApi_I{
-    std::string answerToRequest{};
 public:
     RestApi() = default;
     std::string get() override;

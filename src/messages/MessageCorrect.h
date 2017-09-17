@@ -8,15 +8,17 @@
 
 #include "Message_I.h"
 #include "../../AlgAndDataStructures/TernarySearchTree.h"
+#include "../../AlgAndDataStructures/SpellCorrector.h"
 
 class MessageCorrect : public Message_I{
 
-    std::shared_ptr<SpellCorrector> _corrector;
+    std::unique_ptr<SpellCorrector> _corrector;
     const unsigned int MAX_WORDS{10};
 
 public:
     MessageCorrect();
     std::string getMessage(std::string& message) override ;
+    const std::string getName()const override {return "MessageCorrect";};
 };
 
 

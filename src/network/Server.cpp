@@ -15,7 +15,6 @@
 
 int main(int argc, char** argv)
 {
-
     // Process command line arguments
     if ( argc < 3 || argc > 4 ) {
         printf("usage: %s <workers> <port> <ip>\n", argv[0]);

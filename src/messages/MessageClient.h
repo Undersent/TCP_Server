@@ -8,20 +8,21 @@
 
 #include <memory>
 #include <utility>
+#include <vector>
 #include "Message_I.h"
 #include "MessageSame.h"
 #include "../../AlgAndDataStructures/TernarySearchTree.h"
 
 class MessageClient {
-    std::unique_ptr<Message_I> _message = nullptr;
-    //TST::TernarySearchTree _tst;
+    std::shared_ptr<Message_I> _message = nullptr;
     std::string _cleanMessage{};
+    std::vector<std::shared_ptr<Message_I>> _messagesObjects{};
 
 
 public:
-    explicit MessageClient() =default;
+    explicit MessageClient() = default;
 
-    explicit MessageClient(std::unique_ptr<Message_I> message) : _message(std::move(message)){}
+    explicit MessageClient(std::shared_ptr<Message_I>& message) : _message(std::move(message)){}
 
     std::string getMessage();
 
@@ -29,7 +30,10 @@ public:
 
     const std::string &getCleanMessage() const;
 
-    void prepareMessageToCheckInDictionary(std::string &_message, unsigned int noOfDeletedChar);
+    void prepareMessageToCheckInDictionary(const std::string &_message, unsigned int noOfDeletedChar);
+
+    bool isMessageObjectCreatedYet(const std::string& className);
+
 };
 
 

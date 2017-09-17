@@ -16,57 +16,57 @@
 #include <queue>
 
 class SpellCorrector {
-    struct Word{
+public:
+    struct Word {
         std::string text;
         std::string value;
         size_t editDistance;
-        bool operator<(const Word& rhs) const
-        {
-            if(editDistance > rhs.editDistance){
+
+        bool operator<(const Word &rhs) const {
+            if (editDistance > rhs.editDistance) {
                 return true;
-            }
-            else if (editDistance < rhs.editDistance) {
+            } else if (editDistance < rhs.editDistance) {
                 return false;
-            }else{
+            } else {
                 return compareByValue(rhs);
             }
         }
-        bool compareByValue(const Word& rhs) const
-        {
+
+        bool compareByValue(const Word &rhs) const {
             auto it = value.begin();
             auto it2 = rhs.value.begin();
-            for( ; it != value.end(), it2 != rhs.value.end(); it++, it2++){
-                if((*it - '0') < (*it2 - '0')){
+            for (; it != value.end(), it2 != rhs.value.end(); it++, it2++) {
+                if ((*it - '0') < (*it2 - '0')) {
                     return false;
                 }
             }
         }
     };
+
     std::string _inputString{};
     const unsigned int _EDIT_DISTANCE_LIMIT = 3;
-    std::shared_ptr<TST::TernarySearchTree> _tst;
-    std::shared_ptr<std::priority_queue<Word>> _wordsPQ;
+    std::unique_ptr<TernarySearchTree> _tst;
+    std::unique_ptr<std::priority_queue<Word>> _wordsPQ;
+
 public:
 
 
-    explicit SpellCorrector();
+    SpellCorrector();
 
     void readFileIntoTST();
 
-    size_t getLevenshteinDistance(const std::string &s1, const std::string &s2);
+    size_t computeLevenshteinDistance(const std::string &s1, const std::string &s2) const;
 
-    void traverse(const std::shared_ptr<TST::TernarySearchTree::Node> &root, std::string str);
+    void traverse(const std::unique_ptr<TernarySearchTree::Node> &root, const std::string str) const;
 
-    std::shared_ptr<std::priority_queue<Word>> correctWord(std::string& strToCompare);
+    std::unique_ptr<std::priority_queue<Word>> &correctWord(const std::string &strToCompare);
 
     void setInputString(const std::string &inputString);
 
-    const std::shared_ptr<std::priority_queue<Word>> &getWordsPQ() const;
+    std::unique_ptr<std::priority_queue<Word>> &getWordsPQ();
 
 
 };
-
-
 
 
 #endif //PROJECT_SPELLCORRECTOR_H

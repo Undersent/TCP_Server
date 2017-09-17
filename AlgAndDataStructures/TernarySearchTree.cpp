@@ -4,37 +4,37 @@
 
 #include <iostream>
 #include "TernarySearchTree.h"
-namespace TST {
+
 
     //std::shared_ptr<TernarySearchTree::Node> TernarySearchTree::getRoot() {
     //    return (_root);
     //}
 
-    const std::shared_ptr<TST::TernarySearchTree::Node> &TST::TernarySearchTree::getRoot() const {
+    const std::unique_ptr<TernarySearchTree::Node> &TernarySearchTree::getRoot() const {
         return _root;
     }
 
-    void TernarySearchTree::setRoot(const std::shared_ptr<Node>& node) {
-        _root = (node);
+    void TernarySearchTree::setRoot(Node node) {
+        _root = std::make_unique<Node>(std::move(node));
     }
 
-    void TernarySearchTree::insert(std::string& word, std::string& frequency) {
+    void TernarySearchTree::insert(const std::string& word, const  std::string& frequency) {
         _root = insert((_root), word, frequency, 0);
     }
 
-    std::shared_ptr<TernarySearchTree::Node>
-    TernarySearchTree::insert(std::shared_ptr<TernarySearchTree::Node> &node,
-                              std::string &word, std::string frequency, unsigned int pos) {
+    std::unique_ptr<TernarySearchTree::Node>
+    TernarySearchTree::insert(std::unique_ptr<TernarySearchTree::Node> &node,
+                              const std::string &word,const  std::string& frequency,const unsigned int pos) {
         if (node == nullptr) {
             if (word.length() <= pos) {
-                return (node);
+                return std::move(node);
             }
 
-            node = std::make_shared<TernarySearchTree::Node>(TernarySearchTree::Node(word.at(pos)));
+            node = std::make_unique<TernarySearchTree::Node>(TernarySearchTree::Node(word.at(pos)));
             if (pos + 1 == word.length()) {
                 node->_isEnd = true;
                 node->_frequency = frequency;
-                return (node);
+                return std::move(node);
             }
         }
         if(word.at(pos) < node->_data){
@@ -50,34 +50,34 @@ namespace TST {
                 node-> _frequency = frequency;
             }
         }
-        return (node);
+        return std::move(node);
     }
 
-    bool TernarySearchTree::search(std::shared_ptr<TernarySearchTree::Node> node, std::string &word, unsigned int pos) const {
+    bool TernarySearchTree::search(std::unique_ptr<TernarySearchTree::Node> node,
+                                   const std::string &word, unsigned int pos) const {
         while (node != nullptr) {
             if (word.at(pos) < node->_data) {
-                node = (node->_left);
+                node = std::move(node->_left);
             } else if (word.at(pos) > node->_data) {
-                node = (node->_right);
+                node = std::move(node->_right);
             } else{
                 if (node->_isEnd && pos == word.length() - 1) {
                     return true;
                 }
                 pos++;
-                node = (node->_equal);
+                node = std::move(node->_equal);
             }
         }
         return false;
     }
 
-    void TernarySearchTree::traverseTSTUtil(const std::shared_ptr<TernarySearchTree::Node>& root,
-                                            char* buffer, unsigned int depth) {
+    void TernarySearchTree::traverseTSTUtil(const std::unique_ptr<TernarySearchTree::Node>& root,
+                                            char* buffer,const unsigned int depth) {
         if(root){
             traverseTSTUtil(root->_left, buffer, depth);
             buffer[depth] = root->_data;
             if (root->_isEnd) {
                 buffer[depth+1] = '\0';
-                std::cout<<buffer<<"\n";
             }
 
             // Traverse the subtree using equal pointer (middle subtree)
@@ -94,4 +94,3 @@ namespace TST {
 
 
 
-}
