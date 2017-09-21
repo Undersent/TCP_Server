@@ -13,6 +13,7 @@ MessageCorrect::MessageCorrect() : MAX_WORDS(10) {
 }
 
 std::string MessageCorrect::getMessage(std::string& message) {
+    prepareMessageToCheckInDictionary(message, 7);
     try {
         _corrector->correctWord(message);
     }catch(std::exception& e){ return e.what();}
@@ -27,4 +28,15 @@ std::string MessageCorrect::getMessage(std::string& message) {
         return std::string("cant find similar words");
     }else
     return correctedMessage;
+}
+
+void MessageCorrect::prepareMessageToCheckInDictionary(std::string &message,
+                                                      unsigned int noOfDeletedChar) {
+    std::cout<<message<<std::endl;
+    if (!message.empty() && message.substr(0, 7) == "[check]") {
+        message = message.substr(noOfDeletedChar);//to the end
+        std::cout<<message<<std::endl;
+        auto &f = std::use_facet<std::ctype<char>>(std::locale());
+        f.toupper(const_cast<char *>(message.data()), message.data() + message.size());
+    }
 }

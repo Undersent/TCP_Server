@@ -74,12 +74,15 @@ public:
             char input[256];
             ssize_t len;
             while ((len = stream->receive(input, sizeof(input) - 1)) > 0) {
-                input[len] = NULL;
-                std::string decryptedMessage = rsa->decryptString(input) ;
-                messageClient.setMessageStrategy(decryptedMessage);
-                //std::cout<<messageClient.getMessage()<<" wiadomosc do powrotu\n";
-                std::string encryptedMessage = rsa->encryptString(messageClient.getMessage());
-                stream->send(encryptedMessage.c_str(), encryptedMessage.length());
+                if(input != 0){
+                    input[len] = NULL;
+                    std::string decryptedMessage = rsa->decryptString(input) ;
+                    messageClient.setMessageStrategy(decryptedMessage);
+                    //std::cout<<messageClient.getMessage()<<" wiadomosc do powrotu\n";
+                    std::string encryptedMessage = rsa->encryptString(messageClient.getMessage());
+                    stream->send(encryptedMessage.c_str(), encryptedMessage.length());
+                }
+
 
             }
             delete item;

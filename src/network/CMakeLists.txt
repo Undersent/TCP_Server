@@ -8,5 +8,13 @@ set(SOURCE_FILES TCPStreamData.cpp TCPStreamData.h
         AcceptorToTCPServer.cpp AcceptorToTCPServer.h Server.cpp ../../AlgAndDataStructures/RSA.cpp
         ../../AlgAndDataStructures/RSA.h ../multithreading/Thread.cpp ../multithreading/Thread.h
         ../data_transfer/WorkerQueue.h ../data_transfer/WorkItem.h ConnectionHandler.h
-        ../../AlgAndDataStructures/Queue.h ../../AlgAndDataStructures/RSA.cpp ../../AlgAndDataStructures/RSA.h ../../AlgAndDataStructures/TernarySearchTree.cpp ../../AlgAndDataStructures/TernarySearchTree.h ../../AlgAndDataStructures/SpellCorrector.cpp ../../AlgAndDataStructures/SpellCorrector.h ../messages/Message_I.h ../messages/MessageCorrect.cpp ../messages/MessageCorrect.h ../messages/MessageSame.cpp ../messages/MessageSame.h ../messages/MessageClient.cpp ../messages/MessageClient.h ../REST/RestApi_I.h ../REST/RestApi.cpp ../REST/RestApi.h ../messages/MessageChuckNorrisJoke.cpp ../messages/MessageChuckNorrisJoke.h ../messages/MessageWrong.cpp ../messages/MessageWrong.h)
+        ../../AlgAndDataStructures/Queue.h ../../AlgAndDataStructures/RSA.cpp ../../AlgAndDataStructures/RSA.h
+        ../../AlgAndDataStructures/TernarySearchTree.cpp ../../AlgAndDataStructures/TernarySearchTree.h
+        ../../AlgAndDataStructures/SpellCorrector.cpp ../../AlgAndDataStructures/SpellCorrector.h
+        ../messages/Message_I.h ../messages/MessageCorrect.cpp ../messages/MessageCorrect.h
+        ../messages/MessageSame.cpp ../messages/MessageSame.h ../messages/MessageClient.cpp
+        ../messages/MessageClient.h ../REST/RestApi_I.h ../REST/RestApi.cpp ../REST/RestApi.h
+        ../messages/MessageChuckNorrisJoke.cpp ../messages/MessageChuckNorrisJoke.h
+        ../messages/MessageWrong.cpp ../messages/MessageWrong.h ../messages/MessageChatBot.cpp
+        ../messages/MessageChatBot.h)
 add_executable(TCP_Server ${SOURCE_FILES})

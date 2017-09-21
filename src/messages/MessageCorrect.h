@@ -15,10 +15,15 @@ class MessageCorrect : public Message_I{
     std::unique_ptr<SpellCorrector> _corrector;
     const unsigned int MAX_WORDS{10};
 
+private:
+    void prepareMessageToCheckInDictionary(std::string &message, unsigned int noOfDeletedChar);
+
 public:
     MessageCorrect();
     std::string getMessage(std::string& message) override ;
     const std::string getName()const override {return "MessageCorrect";};
+
+
 };
 
 

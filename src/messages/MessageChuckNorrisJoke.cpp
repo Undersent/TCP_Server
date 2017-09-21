@@ -14,6 +14,14 @@ std::string MessageChuckNorrisJoke::getMessage(std::string &message) {
 
 std::string MessageChuckNorrisJoke::makeRestGetRequestToObtainJoke()const {
     RestApi restApi{};
+    if(!restApi.prepareSocketConnection("193.190.253.234", 80)){
+        return "error obtaining joke";
+    }
+     char msg[] = "GET /jokes/random HTTP/1.1\r\n"
+             "Host: api.icndb.com\r\n"
+             "Accept: (application/json|text/plain)\r\n"
+             "\r\n";
+    restApi.setMsg(msg);
     return obtainJokeFromAnswer(restApi.get());
 
 }

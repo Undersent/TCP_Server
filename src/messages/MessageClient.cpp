@@ -7,6 +7,7 @@
 #include "MessageCorrect.h"
 #include "MessageChuckNorrisJoke.h"
 #include "MessageWrong.h"
+#include "MessageChatBot.h"
 #include <locale>
 #include <algorithm>
 
@@ -15,7 +16,7 @@ std::string MessageClient::getMessage() {
     if(messageToClient.empty()) {
         return "sth went wrong";
     }else
-    return _message->getMessage(_cleanMessage);
+    return messageToClient;
 }
 
 bool MessageClient::isMessageObjectCreatedYet(const std::string& className){
@@ -34,7 +35,7 @@ void MessageClient::setMessageStrategy(std::string& message) {
     _message = nullptr;
     if(message[0] != '['){
         if (!isMessageObjectCreatedYet("MessageSame")) {
-            _message = std::make_shared<MessageSame>(MessageSame{});
+            _message = std::make_shared<MessageChatBot>(MessageChatBot{});
             _messagesObjects.push_back(_message);
         }
         _cleanMessage = message;
@@ -45,8 +46,7 @@ void MessageClient::setMessageStrategy(std::string& message) {
             _message = std::make_shared<MessageCorrect>(MessageCorrect{});
             _messagesObjects.push_back(_message);
         }
-        prepareMessageToCheckInDictionary(message, 7);
-
+        _cleanMessage = message;
     } //[check]
     else if (message.substr(0,6) == "[joke]") {
         if(!isMessageObjectCreatedYet("MessageChuckNorrisJoke")){
@@ -67,12 +67,6 @@ const std::string &MessageClient::getCleanMessage() const {
     return _cleanMessage;
 }
 
-void MessageClient::prepareMessageToCheckInDictionary(const std::string &message,
-                                                      unsigned int noOfDeletedChar) {
-    if(!message.empty()) {
-        _cleanMessage = message.substr(noOfDeletedChar);//to the end
-        auto &f = std::use_facet<std::ctype<char>>(std::locale());
-        f.toupper(const_cast<char *>(_cleanMessage.data()), _cleanMessage.data() + _cleanMessage.size());
-    }
-}
+
+
 

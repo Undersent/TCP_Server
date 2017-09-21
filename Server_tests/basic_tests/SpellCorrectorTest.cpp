@@ -12,9 +12,9 @@ class SpellCorrectorTest : public ::testing::Test {
 
 TEST_F(SpellCorrectorTest, spellCorrector){
 
-        //TST::TernarySearchTree tst;
-      //  MessageClient messageClient;
-       // std::string decryptedMessage{"[check]music"};
-       // messageClient.setMessageStrategy(decryptedMessage);
-    //    std::cout<<messageClient.getMessage()<< "<- WIADOMOSC";
+        TernarySearchTree tst;
+        MessageClient messageClient;
+        std::string decryptedMessage{"[check]music"};
+        messageClient.setMessageStrategy(decryptedMessage);
+        std::cout<<messageClient.getMessage()<< "<- WIADOMOSC";
     }
