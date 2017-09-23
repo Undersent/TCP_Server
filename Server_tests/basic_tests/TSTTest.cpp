@@ -10,15 +10,20 @@
 
 namespace TST {
     class TSTTest : public ::testing::Test {
+    public:
+        TernarySearchTree tst{};
+        TSTTest() = default;
+        virtual ~TSTTest()  = default;
 
+        void SetUp() override{
+        }
+
+        void TearDown() override{
+        }
     };
 
-    TEST_F(TSTTest, CreatingClass) {
-        TernarySearchTree tst{};
-    }
 
     TEST_F(TSTTest, insertElement) {
-        TernarySearchTree tst{};
         std::string cat = "cat";
         std::string number123 = "123";
         std::string dog = "dog";
@@ -37,7 +42,6 @@ namespace TST {
     }
 
     TEST_F(TSTTest, traverseTest) {
-        TernarySearchTree tst{};
         std::string cat = "cat";
         std::string number123 = "123";
         std::string dog = "dog";

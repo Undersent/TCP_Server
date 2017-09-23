@@ -30,8 +30,7 @@ public:
 
     const std::string &getCleanMessage() const;
 
-    void prepareMessageToCheckInDictionary(const std::string &_message, unsigned int noOfDeletedChar);
-
+private:
     bool isMessageObjectCreatedYet(const std::string& className);
 
 };

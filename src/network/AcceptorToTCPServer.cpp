@@ -10,7 +10,7 @@
 
 
 AcceptorToTCPServer::AcceptorToTCPServer(int port, const char *address) :
-listeningSocketDescriptor(0), port(port), address(address), isListening(false){}
+        listeningSocketDescriptor(0), port(port), address(address), isListening(false){}
 
 AcceptorToTCPServer::~AcceptorToTCPServer() {
     if(listeningSocketDescriptor > 0){

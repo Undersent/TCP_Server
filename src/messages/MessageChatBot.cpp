@@ -2,23 +2,22 @@
 // Created by rafal on 20.09.17.
 //
 
-#include <sys/socket.h>
-#include <zconf.h>
-#include <arpa/inet.h>
+
 #include <iostream>
 #include <algorithm>
 #include "MessageChatBot.h"
-#include "../REST/RestApi.h"
+
 
 
 std::string MessageChatBot::getMessage(std::string &message) {
+
     return makeRestGetRequestToObtainRespondFromBot(message);
 }
 
 std::string MessageChatBot::makeRestGetRequestToObtainRespondFromBot(std::string &message) const {
     RestApi restApi{};
     if(!restApi.prepareSocketConnection("127.0.0.1", 5000)){
-        return "error obtaining joke";
+        return "error obtaining a respond from bot ;(. He's busy!";
     }
     std::string getRequest = createGetRequest(message);
     std::string msg = "GET /get/"+ getRequest +" HTTP/1.1\r\n"

@@ -65,6 +65,7 @@ public:
 
     std::unique_ptr<std::priority_queue<Word>> &getWordsPQ();
 
+    const std::unique_ptr<TernarySearchTree> &getTST() const;
 
 };
 

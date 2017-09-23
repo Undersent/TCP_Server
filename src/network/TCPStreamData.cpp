@@ -17,10 +17,10 @@ TCPStreamData::~TCPStreamData() {
 TCPStreamData::TCPStreamData(int socketDescriptor, sockaddr_in* address)
         : socketDescriptor(socketDescriptor)
 {
-    //std::array<char, 30> ipAddress{};
+
     char ipAddress[50];
     inet_ntop(PF_INET,(struct in_addr*)&(address->sin_addr.s_addr),
-            ipAddress, sizeof(ipAddress)-1);
+              ipAddress, sizeof(ipAddress)-1);
     peerIP = ipAddress;
     peerPort = ntohs(address->sin_port);
 }

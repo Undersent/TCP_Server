@@ -34,7 +34,7 @@ bool MessageClient::isMessageObjectCreatedYet(const std::string& className){
 void MessageClient::setMessageStrategy(std::string& message) {
     _message = nullptr;
     if(message[0] != '['){
-        if (!isMessageObjectCreatedYet("MessageSame")) {
+        if (!isMessageObjectCreatedYet("MessageChatBot")) {
             _message = std::make_shared<MessageChatBot>(MessageChatBot{});
             _messagesObjects.push_back(_message);
         }

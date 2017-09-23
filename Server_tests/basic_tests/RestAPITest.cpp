@@ -11,12 +11,20 @@
 #include "../../src/messages/MessageChatBot.cpp"
 
 class RestAPITest : public ::testing::Test {
+public:
+    RestApi restApi;
+    RestAPITest() = default;
+    virtual ~RestAPITest()  = default;
 
+    void SetUp() override{
+    }
+
+    void TearDown() override{
+    }
 };
 
 
 TEST_F(RestAPITest, getRequest) {
-    RestApi restApi;
     std::string a = restApi.get();
     std::cout<<a;
 }
@@ -34,10 +42,3 @@ TEST_F(RestAPITest, getChatBotRespond) {
     std::cout<<"\n\n\n";
     std::cout<<"     "<<bot.getMessage(foo);
 }
-
-/*
- *     char msg[] = "GET /get/how%20are%20you? HTTP/1.1\r\n"
-            "Host: localhost:5000\r\n"
-            "Accept: (application/json|text/plain/html)\r\n"
-            "\r\n";
- */

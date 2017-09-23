@@ -17,7 +17,7 @@ int main(int argc, char** argv)
 {
     // Process command line arguments
     if ( argc < 3 || argc > 4 ) {
-        printf("usage: %s <workers> <port> <ip>\n", argv[0]);
+        std::cout<<("usage: %s <workers> <port> <ip>\n", argv[0]);
         exit(-1);
     }
     int workers = atoi(argv[1]);
@@ -45,15 +45,16 @@ int main(int argc, char** argv)
         connectionAcceptor = new AcceptorToTCPServer(port);
     }
     if ( connectionAcceptor->start() != 0) {
-        printf("Could not create an connection acceptor\n");
+        std::cout<<("Could not create an connection acceptor\n");
         exit(1);
     }
 
     // Add a work item to the queue for each connection
     while (1) {
         TCPStreamData* connection = connectionAcceptor->accept();
+
         if (!connection) {
-            printf("Could not accept a connection\n");
+            std::cout<<("Could not accept a connection\n");
             continue;
         }
         item = new WorkItem(connection);

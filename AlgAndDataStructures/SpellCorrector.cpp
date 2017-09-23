@@ -117,6 +117,10 @@ std::unique_ptr<std::priority_queue<SpellCorrector::Word>> &SpellCorrector::getW
     return _wordsPQ;
 }
 
+const std::unique_ptr<TernarySearchTree> &SpellCorrector::getTST() const {
+    return _tst;
+}
+
 
 
 

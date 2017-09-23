@@ -12,10 +12,11 @@ class MessageChuckNorrisJoke : public Message_I{
 public:
     MessageChuckNorrisJoke()=default;
     std::string getMessage(std::string& message) override ;
-
+    const std::string getName()const override {return "MessageChuckNorrisJoke";} ;
+    
+private:
     std::string makeRestGetRequestToObtainJoke() const;
     std::string obtainJokeFromAnswer(std::string answer) const;
-    const std::string getName()const override {return "MessageChuckNorrisJoke";} ;
 };
 
 

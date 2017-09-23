@@ -33,7 +33,7 @@ public:
         char *token;
         len = stream->receive(input, sizeof(input)-1);
         input[len] = NULL;
-        printf("Splitting string \"%s\" into tokens:\n", input); //TODO: Exception
+        std::cout<<("Splitting string \"%s\" into tokens:\n", input); //TODO: Exception
         token = strtok(input, " []");
         while (token != NULL) {
             printf("%s\n", token);
@@ -47,7 +47,6 @@ public:
             stream->send(output, sizeof(output) - 1);
             std::cout << "thread " << (long unsigned int) self()
                       << " established connection. Keys:  " << output << " send back to the client\n";
-            //delete output;
         }
         catch (const std::out_of_range &oor) {
             std::cerr << "Out of Range error: " << oor.what() << '\n';
@@ -60,8 +59,8 @@ public:
 
     void *run() override {
         // Remove 1 item at a time and process it. Blocks if no items are
-        // available to process.
-        //TST::TernarySearchTree tst;
+        // available to work with.
+
         MessageClient messageClient;
         for (int i{}, j{};; i++) {
             std::cout << "thread " << (long unsigned int) self()
